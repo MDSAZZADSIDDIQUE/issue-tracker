@@ -41,8 +41,6 @@ const NewIssuePage = async () => {
       setError('An unexpected error occured');
     }
   });
-
-  await delay(2000);
   return (
     <div className="max-w-xl">
       {error && (
