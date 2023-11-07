@@ -10,12 +10,16 @@ import 'easymde/dist/easymde.min.css';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import SimpleMDE from 'react-simplemde-editor';
+import dynamic from 'next/dynamic';
 import { z } from 'zod';
+import delay from 'delay';
 
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
+  ssr: false,
+});
 type IssueForm = z.infer<typeof createIssueSchema>;
 
-const NewIssuePage = () => {
+const NewIssuePage = async () => {
   const router = useRouter();
   const {
     register,
@@ -38,6 +42,7 @@ const NewIssuePage = () => {
     }
   });
 
+  await delay(2000);
   return (
     <div className="max-w-xl">
       {error && (
